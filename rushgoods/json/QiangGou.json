@@ -1,0 +1,51 @@
+{	
+	"rows": 8,     
+	"totalPages": 2,  
+	"pageSize": 15,    
+	"pageNo": 1,    
+	"prePageNo": 1,
+	"nextPageNo": 1,
+	"firstPageNo": 1,
+	"lastPageNo": 1,
+	"startNo": 1,
+	"endNo": 1,
+	"startRowNum": 0,
+	"endRowNum": 15,
+	"objectBean": null,
+	"url": null,
+	"start": 1,
+	"end": 1,
+	"list":	[
+		{
+			"goodsInfoId": 15151,
+			"goodsInfoName": "GD-SDLSM-007 朗香港风味蛋卷王",
+			"goodsInfoSubTitle": "GD-SDLSM味蛋卷王",
+			"goodsInfoPreferPrice": 23.00,
+			"goodsInfoImgId": "http://180.101.185.20:81/grp0/M00/03/28/wKgBA1hblWWABaoTAAHLCA6jrTY717.jpg",
+			"rushDiscount": 0.85,
+			"count": 100,		
+			"sellCount": 12,
+			"link": "https://www.baidu.com/"
+		}, {
+			"goodsInfoId": 5214,
+			"goodsInfoName": "家居收纳无痕挂钩 水果款 单只",
+			"goodsInfoSubTitle": "GD-SDLSM味蛋卷王",
+			"goodsInfoPreferPrice": 5.12,
+			"goodsInfoImgId": "http://180.101.185.20:81/grp0/M00/00/05/wKgBA1f0P9GALlkDAADs39FVYd8148.jpg",
+			"rushDiscount": 0.57,
+			"count": 101,			
+			"sellCount": 72,
+			"link": "http://mobile.sszmkm.com/"
+		}, {
+			"goodsInfoId": 5213,
+			"goodsInfoName": "家居收纳无痕挂钩风景款单只家居",
+			"goodsInfoSubTitle": "GD-SDLSM味蛋卷王",
+			"goodsInfoPreferPrice": 5.00,
+			"goodsInfoImgId": "http://180.101.185.20:81/grp0/M00/00/05/wKgBA1f0Pr6AeJ_5AAEBLVcPvT0603.jpg",
+			"rushDiscount": 0.55,
+			"count": 100,			
+			"sellCount": 100,
+			"link": "http://mobile.sszmkm.com/"
+		}
+	]
+}

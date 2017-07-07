@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<!-- Link Swiper's CSS -->
+    	<link rel="stylesheet" href="css/swiper.min.css">	
+		<style>
+		    body {
+		        background: #eee;
+		        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+		        font-size: 14px;
+		        color:#000;
+		        margin: 0;
+		        padding: 0;
+		    }
+		    .mui-pull-bottom-pocket {
+			    visibility: visible!important;
+			}
+		    .swiper-container {    
+			    z-index: 999!important;
+			}
+			.mui-scroll-wrapper {   
+			    top: 148px!important;			    
+			}
+		    .swiper-container {
+		        width: 100%;
+		        /*height: 80px;*/
+		        margin: 0 auto;
+		    }
+		    .swiper-slide {
+		        text-align: center;
+		        font-size: 18px;
+		        background: #fff;
+		        
+		        /* Center slide text vertically */
+		        display: -webkit-box;
+		        display: -ms-flexbox;
+		        display: -webkit-flex;
+		        display: flex;
+		        -webkit-box-pack: center;
+		        -ms-flex-pack: center;
+		        -webkit-justify-content: center;
+		        justify-content: center;
+		        -webkit-box-align: center;
+		        -ms-flex-align: center;
+		        -webkit-align-items: center;
+		        align-items: center;
+		    }		    
+		    .pNo{
+		    	width: 100%;
+		    	background-color: #2d3845;		    	
+		    }
+		    .pNo p{		    	
+		    	color: #999;
+		    }
+		    .pYes{
+		    	background-color: #fc353a;
+		    	width: 100%;
+		    }
+		    .pYes p{		    	
+		    	color: #fff;
+		    }
+		    .pZhouQi{
+		    	height: 20px;
+			    line-height: 20px;
+			    margin: 5px 0 0 0;
+			    font-size: 17px;
+    			font-weight: 700; 
+		    }
+		    .pZhuangTai{
+		    	height: 18px;
+			    margin-bottom: 5px;
+			    font-size: 12px;
+		    }
+		    .pDJShi{
+		    	position: absolute;
+		    	bottom: 0;
+		    	left: 0;
+	    	    padding-left: 4px;
+	    	    height: 28px;
+    			line-height: 28px;
+		    	font-size: 14px;
+		    	color: #fff;
+		    }
+		    .pdddd{
+		    	color: #fff;
+		    	background: rgba(0,0,0,0.4) ;		    	
+		    }    	
+		</style>
+		<style type="text/css">	
+			*{
+				box-sizing:content-box
+			}						
+			.pLBiaoX{					
+				position: relative;		
+				display: block;	
+			}
+			.Pmask1,.Pmask2{     /*圆形已抢购、已结束*/
+				position: absolute;
+				top: 18px;
+				left: 18px;
+				width: 80px;
+				height: 80px;
+				background-color: #000;
+				color: #fff;
+				border-radius: 50%;
+				text-align: center;
+				line-height: 80px;
+				font-size: 18px;
+				opacity: 0.4;				
+			}
+			.pIMG{
+				width: 130px;
+				height: 130px;
+				position: absolute;	
+				border-bottom: 3px solid #fff;			
+			}
+			.pDiv{				
+				margin-left: 130px;  /*要等于.pIMG的width*/
+				padding: 0 5px;				
+				height: 132px;
+				border-bottom: 1px solid #dbdbdb;
+			}
+			.pDiv h3{
+				line-height: 20px;
+			    margin: 0;		
+		        padding-top: 7px;	    
+			    overflow: hidden;
+			    display: -webkit-box;
+			    -webkit-line-clamp: 1;
+			    -webkit-box-orient: vertical;
+			    color: #3c3c3c;			
+			    font-size: 16px;
+			    font-weight: 500;
+			    width: 100%;
+			    height: 20px;
+			}
+			.pZhe{
+				background-color: #ffb7b7;
+				width: 30px;
+				height: 20px;
+				color: #fff;	
+				font-size: 12px;
+				border-radius: 10px;
+				text-align: center;
+			}
+			.PJiaGe1{
+				color: #3c3c3c;
+			    font-size: 15px;
+			}
+			.PJiaGe2{
+				color: #ff5e5d;
+			    font-size: 15px;
+			    font-weight: 800;
+			}			
+			.PJiaGe3{
+				color: #9c9c9c;
+			    font-size: 15px;
+			}
+			.pXSan{
+			    height: 37px;
+			    margin: 6px 0 4px 0;
+			    position: relative;
+			}
+			.pfuture{              /*周四晚8点准时开抢*/
+				position: absolute;
+				left: 0;
+				top: -3px;
+				padding: 0;
+				height: 16px;
+				line-height: 16px;
+				font-size: 12px;
+   				color: #41c141;
+				display: none;
+			}
+			.pQiangGouJinDu{		/*百分比进度条	正在抢,已抢完,已结束*/	
+				position: absolute;
+				left: 0;
+				padding: 21px 0 0 0;
+				height: 16px;
+				display: block;
+			}
+			.pQiangGouJinDu11{
+				width: 100px;
+				height: 10px;
+				background-color: #ffb7b7;
+				border: 1px solid #ff5e5d;
+				border-radius: 5px;
+			}
+			.pQiangGouJinDu22{
+				position: absolute;
+				top :22px;
+				left: 0px;
+				height: 10px;
+				border-radius: 5px;
+				background-color: #ff5e5d;
+			}
+			.pLBiaoXQiangWan .pQiangGouJinDu22{
+				width: 102px;
+			}
+			.pQiangGouJinDu33{
+				width: 102px;
+			    text-align: center;
+			    font-size: 12px;
+			    font-weight: 900;
+			    position: absolute;
+			    top: 21px;
+			    height: 12px;
+			    line-height: 12px;
+			    color: #fff;
+			}
+			.pQiangA{					
+				position: absolute;
+				right: 0;
+			}
+			.pQiangA11{      /*马上抢,原价购买*/
+				width: 76px;
+			    height: 24px;
+			    margin-top: 13px;
+			    border-radius: 6px;
+			    text-align: center;
+			    background-color: #ff5e5d;
+			    color: #fff;
+			    font-size: 16px;
+			    line-height: 24px;
+		        font-weight: 700;
+			}
+			.pQiangA44{      /*马上抢,原价购买*/
+				width: 76px;
+			    height: 24px;
+			    margin-top: 13px;
+			    border-radius: 6px;
+			    text-align: center;
+			    background-color: #f23030;
+				color: #fff;
+			    font-size: 16px;
+			    line-height: 24px;
+		        font-weight: 700;
+			}
+			.pQiangA55{      /*卖光了*/
+				width: 76px;
+			    height: 24px;
+			    margin-top: 13px;
+			    border-radius: 6px;
+			    text-align: center;
+			    background-color: #eee;
+				color: #999;
+			    font-size: 16px;
+			    line-height: 24px;
+			}
+			.pQiangA33{      /*即将开始*/
+				width: 76px;
+			    height: 24px;
+			    margin-top: 13px;
+			    border-radius: 6px;
+			    text-align: center;
+			    background-color: #41c141;
+			    color: #fff;
+			    font-size: 16px;
+			    line-height: 24px;
+		        font-weight: 700;
+			}
+			.pQiangA22{         /*已抢3423件*/
+				    width: 100%;
+				    text-align: center;
+				    font-size: 12px;
+				    position: absolute;
+				    top: -5px;
+				    color: #fc353a;
+				    display: block;
+			}
+			.pLBiaoXJieShu .Pmask1 {     /*已结束样式*/
+				display: block;
+			}
+			.pLBiaoXJieShu .Pmask2 {    
+				display: none;
+			}
+			.pLBiaoXJieShu .pQiangA11{
+				display: none;				
+			}			
+			.pLBiaoXJieShu .pQiangA22{     
+				display: none;
+			}
+			.pLBiaoXJieShu .pQiangA33{     
+				display: none;
+			}
+			.pLBiaoXJieShu .pQiangA44{
+				display: block;				
+			}
+			.pLBiaoXJieShu .pQiangA55{
+				display: none;				
+			}	
+			.pLBiaoXJieShu .pQiangGouJinDu{     
+				display: none;
+			}
+			.pLBiaoXJieShu .pfuture{     
+				display: none;
+			}
+			.pLBiaoXZaiQiang .Pmask1 {     /*正在抢样式*/
+				display: none;
+			}			
+			.pLBiaoXZaiQiang .Pmask2 {    
+				display: none;
+			}
+			.pLBiaoXZaiQiang .pQiangA11{
+				display: block;				
+			}			
+			.pLBiaoXZaiQiang .pQiangA22{     
+				display: none;
+			}
+			.pLBiaoXZaiQiang .pQiangA33{     
+				display: none;
+			}
+			.pLBiaoXZaiQiang .pQiangA44{
+				display: none;				
+			}	
+			.pLBiaoXZaiQiang .pQiangA55{
+				display: none;				
+			}			
+			.pLBiaoXZaiQiang .pQiangGouJinDu{     
+				display: none;
+			}
+			.pLBiaoXZaiQiang .pfuture{     
+				display: none;
+			}
+			.pLBiaoXQiangWan .Pmask1 {     /*抢完样式*/
+				display: none;
+			}
+			.pLBiaoXQiangWan .Pmask2 {     
+				display: block;
+			}
+			.pLBiaoXQiangWan .pQiangA11{     
+				display: none;
+			}
+			.pLBiaoXQiangWan .pQiangA22{     
+				display: none;
+			}
+			.pLBiaoXQiangWan .pQiangA33{     
+				display: none;
+			}
+			.pLBiaoXQiangWan .pQiangA44{     
+				display: none;
+			}
+			.pLBiaoXQiangWan .pQiangA55{     
+				display: block;
+			}
+			.pLBiaoXQiangWan .pQiangGouJinDu{     
+				display: none;
+			}
+			.pLBiaoXQiangWan .pfuture{     
+				display: none;
+			}
+			.pLBiaoXFuture .Pmask1 {     /*即将开始样式*/
+				display: none;
+			}
+			.pLBiaoXFuture .Pmask2 {    
+				display: none;
+			}
+			.pLBiaoXFuture .pQiangA11{     
+				display: none;
+			}
+			.pLBiaoXFuture .pQiangA22{     
+				display: none;
+			}
+			.pLBiaoXFuture .pQiangA33{     
+				display: block;
+			}
+			.pLBiaoXFuture .pQiangA44{     
+				display: none;
+			}
+			.pLBiaoXFuture .pQiangA55{     
+				display: none;
+			}
+			.pLBiaoXFuture .pQiangGouJinDu{     
+				display: none;
+			}
+			.pLBiaoXFuture .pfuture{     
+				display: block;
+			}
+			.pQiangA11,.pQiangA33,.pQiangA44,.pQiangA55{
+				font-size: 15px;
+				letter-spacing: 1px;
+				height: 20px;
+				line-height: 20px;
+				font-weight: 600;
+			}
+			.pDiv h3{
+				padding-top: 10px;
+			    line-height: 18px;
+			    font-size: 14px;
+			    height: 39px;
+			    -webkit-line-clamp: 2;
+			}
+			.pZhe{
+				height: 13px;
+				line-height: 14px;
+				display: none;
+			}
+			.pXSan{
+				height: 34px;
+			}
+			.goodsInfoSubTitle{
+			    overflow: hidden;
+			    display: -webkit-box;
+   				-webkit-line-clamp: 1;
+   			    -webkit-box-orient: vertical;
+   			    color: #fc353a;
+   				font-size: 12px;
+   			    height: 13px;
+    			line-height: 14px;
+			}
+		</style>
+	</head>
+
+	<body>	
+		
+		<!-- Swiper -->		
+	    <div class="swiper-container">
+	        <div class="swiper-wrapper">
+	            
+	        </div>
+	        <!-- Add Pagination -->
+	        <div class="swiper-pagination"></div>
+	    </div>
+		<!--倒计时-->
+		<div style="position: fixed; top:48px;">
+			<img src="images/2.png" width="100%" height="100px" style="display: block;"/>
+			<div class="pDJShi">
+				<span id="timeTextChange"></span>
+				<sapn id="LeftTime"></sapn>
+			</div>
+		</div>
+		
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">					
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<div class="mui-table-view mui-table-view-chevron">
+				</div>
+			</div>
+		</div> 
+		<script src="js/jquery.min.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			// 两数相除  
+		    function accDiv(num1,num2){  
+		       var t1,t2,r1,r2;  
+		       try{  
+		           t1 = num1.toString().split('.')[1].length;  
+		       }catch(e){  
+		           t1 = 0;  
+		       }  
+		       try{  
+		           t2=num2.toString().split(".")[1].length;  
+		       }catch(e){  
+		           t2=0;  
+		       }  
+		       r1=Number(num1.toString().replace(".",""));  
+		       r2=Number(num2.toString().replace(".",""));  
+		       return (r1/r2)*Math.pow(10,t2-t1);  
+		    }  
+		    // 两数相乘  
+		    function accMul(num1,num2){  
+		       var m=0,s1=num1.toString(),s2=num2.toString();   
+			    try{m+=s1.split(".")[1].length}catch(e){};  
+			    try{m+=s2.split(".")[1].length}catch(e){};  
+			    return Number(s1.replace(".",""))*Number(s2.replace(".",""))/Math.pow(10,m);  
+		    }  
+		</script>
+		<script>	
+
+		    //  倒计时
+			var sh = null,sh2 = null;
+			function checktime(i){  
+			    if(i<10) {  
+			        i="0"+i;  
+			    } else {
+			    	i=i;
+			    }
+		   	 	return i;  
+		    }  
+		    function freshTime(nowPKaiShi, flag, nowPJieShu){  
+		    	
+			    var lefttime=parseInt(nowPKaiShi-nowTime);//这是毫秒，如果再/1000就是秒  
+			    // 获取剩下的日、小时、分钟、秒钟  
+			    // 一天有多少毫秒，一小时有多少毫秒，一分钟有多少毫秒，一秒钟有多少毫秒  
+			    var dm=24*60*60*1000;  
+			    var d=parseInt(lefttime/dm);  
+			    var hm=60*60*1000;  
+			    var h=parseInt((lefttime/hm)%24);  
+			    var mm=60*1000;  
+			    var m=parseInt((lefttime/mm)%60);  
+			    var s=parseInt((lefttime/1000)%60);  
+			    m=checktime(m);  
+			    s=checktime(s);
+			    d = ((d+"").length == 1)?("0"+d):d;
+			    h = ((h+"").length == 1)?("0"+h):h;
+			    document.getElementById('LeftTime').innerHTML="<font class='pdddd'>"+d+"</font> 天 <font class='pdddd'>"+h+"</font> 时 <font class='pdddd'>"+m+"</font> 分 <font class='pdddd'>"+s+"</font> 秒";  
+			    if (lefttime<=0) {  
+		            if(flag) {
+		            	clearInterval(sh);
+				    	clearInterval(sh2);
+				    	freshTime(nowPJieShu, false);
+				    	sh2=setInterval('freshTime('+nowPJieShu+', false)',1000);         	
+					    document.getElementById('timeTextChange').innerText="距结束：";
+//					    $(".pYes .pZhuangTai").eq(0).html("抢购进行中");
+					    $(".pYes .pLBYangShi").eq(0).html("pLBiaoX pLBiaoXZaiQiang pLBiaoXQiangWan");
+					    var QHKaiShi5 = $(".pppJSHong>.pKaiShi").eq(0).html();
+					    var QHJieShu5 = $(".pppJSHong>.pJieShu").eq(0).html();
+		    			$(".mui-table-view").empty();
+		    			var aYShiQH5 = "pLBiaoX pLBiaoXZaiQiang pLBiaoXQiangWan";
+		    			var huoDongID5 = $(".pppJSHong>.pIDArray").eq(0).html();
+    					getLieBiaoShuJu(QHKaiShi5,aYShiQH5,huoDongID5,QHJieShu5);
+			        } else {			        	
+			        	clearInterval(sh);
+			         	clearInterval(sh2);
+						location.reload(true);   
+			         	  
+			        }
+			    }  
+		    }   
+		    function pControlCountdown(nowPKaiShi,nowPJieShu){  
+			    if(nowTime<nowPKaiShi) {		    	
+			    	clearInterval(sh);
+			    	clearInterval(sh2);
+			    	freshTime(nowPKaiShi,true,nowPJieShu);
+			    	sh=setInterval('freshTime('+nowPKaiShi+',true,'+nowPJieShu+')',1000);     
+				    document.getElementById('timeTextChange').innerText="距开始：";    	
+		        }else if(nowTime>=nowPKaiShi && nowTime<nowPJieShu) {
+		        	clearInterval(sh);
+			    	clearInterval(sh2);
+			    	freshTime(nowPJieShu, false,nowPJieShu);
+			    	sh2=setInterval('freshTime('+nowPJieShu+', false,'+nowPJieShu+')',1000);         	
+				    document.getElementById('timeTextChange').innerText="距结束：";   	
+		        }else{
+		        	clearInterval(sh);
+			    	clearInterval(sh2);
+			    	document.getElementById('timeTextChange').innerText="本场次已结束！";  
+		        	document.getElementById('LeftTime').innerHTML=""; 
+		        }
+		    }  //  倒计时!
+		    
+		    var countPages = 0; //记录当前展示了几页
+			var totalPages = 1;  //总共有几页
+			
+		    //请求列表数据并生成列表    
+		    function getLieBiaoShuJu(time,yangShi,marketingId,time2){   // 参数：活动开始时间，样式, ID字符串, 活动结束时间
+		    	var pageNo = countPages+1;
+		    	var pageSize = 20;
+		    	$.ajax({
+					type : "get",  
+					dataType: "json",
+//					data: {
+//						marketingBegin: time,
+//						marketingId: marketingId
+//					},					
+	                url: "json/QiangGou.json", 
+	                //async: false,  
+	                success: function (data) { 	
+	                		var goodsArr = data.list;
+	                		totalPages = data.totalPages;
+	                		countPages = countPages+1;
+	                       	time = parseInt(time);
+	                        var pH2 = new Date(time).getHours();
+                    		var pM2 = new Date(time).getMinutes();
+                    		var aZhJ = "周" + "日一二三四五六".charAt(new Date(time).getDay());
+                    		var aKSTime = (Array(2).join(0)+pH2).slice(-2)+":"+(Array(2).join(0)+pM2).slice(-2); 
+	                        var aYangShi;      //列表样式
+	                        var YSArray = yangShi.split(" "); 
+	                        var table = document.body.querySelector('.mui-table-view');
+							for (var i = 0, len = goodsArr.length; i < len; i++) {
+								var aBaiFenBi = Math.floor(accDiv(goodsArr[i].sellCount,goodsArr[i].count)*100); //   已抢的百分比  格式为：  0-100；
+								if(nowTime> time2 || nowTime< time){
+									aYangShi = yangShi;
+								}
+								if(nowTime>= time && nowTime<= time2 && aBaiFenBi<100){
+									aYangShi = YSArray[0]+' '+YSArray[1];
+								}
+								if(nowTime>= time && nowTime<= time2 && aBaiFenBi== 100){
+									aYangShi = YSArray[0]+' '+YSArray[2];
+								}
+								var aLi = document.createElement('a');
+								aLi.setAttribute("href",goodsArr[i].link);
+								aLi.className = aYangShi;
+								aLi.innerHTML = 	'<img class="pIMG" src="'+goodsArr[i].goodsInfoImgId+'"/>'+
+											'<div class="Pmask1">已结束</div>'+
+											'<div class="Pmask2">已抢完</div>'+
+											'<div class="pDiv">'+
+												'<h3>'+goodsArr[i].goodsInfoName+'</h3>'+
+												'<div class="pZhe">'+accMul(goodsArr[i].rushDiscount,10)+'折</div>'+
+												'<div class="goodsInfoSubTitle">'+goodsArr[i].goodsInfoSubTitle+'</div>'+
+												'<div style="padding-top: 4px;">'+
+													'<span class="PJiaGe1">抢购价：</span>'+
+													'<span class="PJiaGe2">&yen;<span >'+(accMul(goodsArr[i].rushDiscount,goodsArr[i].goodsInfoPreferPrice)).toFixed(2)+'</span></span>&nbsp;&nbsp;'+								
+													' <del class="PJiaGe3">&yen;<span>'+goodsArr[i].goodsInfoPreferPrice+'</span></del>'+
+												'</div>'+
+												'<div  class="pXSan">'+
+													'<div class="pfuture" ><span>'+aZhJ+'</span>'+aKSTime+'准时开抢</div>'+
+													'<div class="pQiangGouJinDu">'+
+														'<div class="pQiangGouJinDu11"></div>'+
+														'<div class="pQiangGouJinDu22" style="width:'+accDiv(accMul(aBaiFenBi,102),100)+'px;"></div>'+
+														'<div class="pQiangGouJinDu33"><apn>'+aBaiFenBi+'</apn>%</div>'+
+													'</div>'+
+													'<div class="pQiangA">'+
+														'<div class="pQiangA11">马尚抢&gt;</div>'+							
+														'<div class="pQiangA22">已抢<span>'+goodsArr[i].sellCount+'</span>件</div>'+
+														'<div class="pQiangA33">即将开始</div>'+
+														'<div class="pQiangA44">原价购买</div>'+
+														'<div class="pQiangA55">卖光了</div>'+
+													'</div>'+
+												'</div>'+
+											'</div>';	
+								table.appendChild(aLi);
+								
+								$(".mui-table-view-chevron a").off("tap").on("tap", function(e) {
+									location.href = this.getAttribute("href");
+								})
+							}
+	                }, 
+	                error: function (XMLHttpRequest, textStatus, errorThrown) { 
+	                        mui.alert('暂时无法获取商品信息，请稍后刷新重试！'); 
+	                } 
+	        	});
+		    }
+		    
+		    var huoDongXiaoShi = [];  // 每场活动页面的消失时间
+			
+		    
+
+			// 根据毫秒得到月、日
+			function pDeDaoRiYue(abc){             
+                var month = (new Date(abc).getMonth()+1)+'月';
+                var day = new Date(abc).getDate()+'日';
+                return month+day;
+            }
+			
+			var nowTime;  //  "当前时间-豪秒"	
+			var dateArray = []; //展示的是哪些日期、对应日期下活动的Id  格式：[  ["6月8日", [1,2], "活动开始时间-豪秒", "几点开抢", "结束时间-毫秒"],  ["6月8日",[1,2],"豪秒", "19:30","豪秒"]]
+			// 更新当前时间
+		    function getNowTime(){
+		    	nowTime = nowTime+1000;
+		    	for(var i=0; i<huoDongXiaoShi.length;i++){
+		    		if(nowTime == huoDongXiaoShi[i]){
+		    			location.reload(true);console.log('aaaaaa');
+		    		}
+		    	}
+		    	for(var i=0; i<dateArray.length;i++){
+		   			 //	alert('111');
+		    		if(nowTime == dateArray[i][2]){
+		    			for(var i=0; i<dateArray.length; i++) {
+							if(nowTime>=dateArray[i][4]){
+								$(".pJS1 .pLBYangShi").eq(i).html("pLBiaoX pLBiaoXJieShu");
+								$(".pJS1 .pZhuangTai").eq(i).html("已结束");
+							}else if(nowTime>=dateArray[i][2]){
+								$(".pJS1 .pLBYangShi").eq(i).html("pLBiaoX pLBiaoXZaiQiang pLBiaoXQiangWan");
+								$(".pJS1 .pZhuangTai").eq(i).html(dateArray[i][3]);
+							}else {
+								$(".pJS1 .pLBYangShi").eq(i).html("pLBiaoX pLBiaoXFuture");
+								$(".pJS1 .pZhuangTai").eq(i).html(dateArray[i][3]);
+							}				
+			        	}
+		    		}
+		    		if(nowTime == dateArray[i][4]){
+		    			for(var i=0; i<dateArray.length; i++) {
+							if(nowTime>=dateArray[i][4]){
+								$(".pJS1 .pLBYangShi").eq(i).html("pLBiaoX pLBiaoXJieShu");
+								$(".pJS1 .pZhuangTai").eq(i).html("已结束");
+							}else if(nowTime>=dateArray[i][2]){
+								$(".pJS1 .pLBYangShi").eq(i).html("pLBiaoX pLBiaoXZaiQiang pLBiaoXQiangWan");
+								$(".pJS1 .pZhuangTai").eq(i).html(dateArray[i][3]);
+							}else {
+								$(".pJS1 .pLBYangShi").eq(i).html("pLBiaoX pLBiaoXFuture");
+								$(".pJS1 .pZhuangTai").eq(i).html(dateArray[i][3]);
+							}				
+			        	}
+		    		}
+	    		}
+		    }
+			//  请求数据，获得nowTime，dateArray的值, 加载页面
+			$.ajax({
+				type : "get",  
+				dataType: "json",
+                url: "json/111111.json", 
+                async: false,
+                success: function (data) {                         
+						nowTime = data.servertime;
+						var times = setInterval("getNowTime()",1000);
+                        dateArray = [];
+                        var marketingBegin = "";
+                        var marketingEnd = "";
+                        var marketingId = 0;
+                        var phave = false;
+                        var pcouter = 0;
+                        var pH , pM ;
+                        for(var a=0;a<data.marketingrush.length;a++){
+                        	if(nowTime < data.marketingrush[a].marketingEnd ){
+                        		huoDongXiaoShi.push(data.marketingrush[a].marketingEnd);
+                        		marketingBegin = data.marketingrush[a].marketingBegin;
+	                        	marketingEnd = data.marketingrush[a].marketingBegin +7200000;      
+	                        	marketingId = data.marketingrush[a].marketingId;  
+	                        	pH = new Date(marketingBegin).getHours();
+	                    		pM = new Date(marketingBegin).getMinutes();
+	                        	if(dateArray.length==0)
+	                        	{
+	                        		dateArray[0] = [];
+	                        		dateArray[0][0] = pDeDaoRiYue(marketingBegin); 
+	                        		dateArray[0][1] = [];
+	                        		dateArray[0][1].push(marketingId);
+	                        		dateArray[0][2] = marketingBegin;                         		
+	                        		dateArray[0][3] = (Array(2).join(0)+pH).slice(-2)+":"+(Array(2).join(0)+pM).slice(-2); 
+	                        		dateArray[0][4] = marketingEnd; 
+	                        	}else{                        		
+	                        		for(var b=0;b<dateArray.length;b++){
+	                        			pcouter = b;
+	                        			if(marketingBegin == dateArray[b][2]){
+	                        				dateArray[b][1].push(marketingId);
+	                        				phave = false;
+	                        				break;
+	                        			}else{
+	                        				phave = true;
+	                        			}                        			
+	                        		}
+	                        		if(phave == true){
+											dateArray[pcouter+1] = [];
+		                    				dateArray[pcouter+1][0] = pDeDaoRiYue(marketingBegin); 
+			                        		dateArray[pcouter+1][1] = [];
+			                        		dateArray[pcouter+1][1].push(marketingId);
+			                        		dateArray[pcouter+1][2] = marketingBegin; 
+			                        		dateArray[pcouter+1][3] = (Array(2).join(0)+pH).slice(-2)+":"+(Array(2).join(0)+pM).slice(-2); 
+			                        		dateArray[pcouter+1][4] = marketingEnd; 
+	                    			}
+	                        	} 
+                        	}
+                        }
+                    // 顶部滑动条           动态创建  class="swiper-slide"
+				    	var html = '';
+				    	var aQJShu = 0;
+						for(var i=0; i<dateArray.length; i++) {
+							if(nowTime>=dateArray[i][4]){
+								aQJShu++;
+								html += '<div class="swiper-slide">	'+
+				            		'<div class="pJS1 pNo">'+
+				            		'<p class="pZhouQi">'+ dateArray[i][0] +'</p>'+
+				            		'<p class="pIDArray" style="display:none;">'+ dateArray[i][1] +'</p>'+
+				            		'<p class="pKaiShi" style="display:none;">'+ dateArray[i][2] +'</p>'+
+				            		'<p class="pJieShu" style="display:none;">'+ dateArray[i][4] +'</p>'+
+				            		'<p class="pLBYangShi" style="display:none;">pLBiaoX pLBiaoXJieShu</p>'+
+				            		'<p class="pZhuangTai">已结束</p>'+
+				            		'</div>'+
+				            		'</div>';
+							}else if(nowTime>=dateArray[i][2]){
+								html += '<div class="swiper-slide">	'+
+				            		'<div class="pJS1 pppJSHong pNo">'+
+				            		'<p class="pZhouQi">'+ dateArray[i][0] +'</p>'+
+				            		'<p class="pIDArray" style="display:none;">'+ dateArray[i][1] +'</p>'+
+				            		'<p class="pKaiShi" style="display:none;">'+ dateArray[i][2] +'</p>'+
+				            		'<p class="pJieShu" style="display:none;">'+ dateArray[i][4] +'</p>'+
+				            		'<p class="pLBYangShi" style="display:none;">pLBiaoX pLBiaoXZaiQiang pLBiaoXQiangWan</p>'+
+				            		'<p class="pZhuangTai">'+ dateArray[i][3] +'</p>'+
+				            		'</div>'+
+				            		'</div>';
+							}else {
+								html += '<div class="swiper-slide">	'+
+				            		'<div class="pJS1 pppJSHong pNo">'+
+				            		'<p class="pZhouQi">'+ dateArray[i][0] +'</p>'+
+				            		'<p class="pIDArray" style="display:none;">'+ dateArray[i][1] +'</p>'+
+				            		'<p class="pKaiShi" style="display:none;">'+ dateArray[i][2] +'</p>'+
+				            		'<p class="pJieShu" style="display:none;">'+ dateArray[i][4] +'</p>'+
+				            		'<p class="pLBYangShi" style="display:none;">pLBiaoX pLBiaoXFuture</p>'+
+				            		'<p class="pZhuangTai">'+ dateArray[i][3] +'</p>'+
+				            		'</div>'+
+				            		'</div>';
+							}				
+			        	}
+				        $(".swiper-wrapper").html(html);   	
+//				        console.log(aQJShu-1);
+			        //倒计时、商品列表
+			        	if(aQJShu == dateArray.length){
+			        		var KaiShi6 = $(".pJS1>.pKaiShi").eq(aQJShu-1).html();
+							var JieShu6 = $(".pJS1>.pJieShu").eq(aQJShu-1).html();
+							$(".pJS1").eq(aQJShu-1).attr("class", "pJS1 pYes");	
+			    			pControlCountdown(KaiShi6,JieShu6);
+			        	}else{
+			        		var KaiShi = $(".pppJSHong>.pKaiShi").eq(0).html();
+							var JieShu = $(".pppJSHong>.pJieShu").eq(0).html();
+		    				pControlCountdown(KaiShi,JieShu);
+			        	}
+                }, 
+                error: function (XMLHttpRequest, textStatus, errorThrown) { 
+                        mui.alert('暂时无法获取数据，请稍后刷新重试！'); 
+                } 
+        	});
+        		
+		</script>
+		
+		<script>
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			
+			
+			
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				setTimeout(function() {
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				}, 500);
+			}
+			
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			
+			function pullupRefresh() {
+				
+				setTimeout(function() {
+					if(countPages >= totalPages){
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true); //参数为true代表没有更多数据了。
+					}else{
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
+						var KaiShi7 = $(".pppJSHong>.pKaiShi").eq(0).html();
+						var QHJieShu7 = $(".pppJSHong>.pJieShu").eq(0).html();
+						var aYShi7 = $(".pppJSHong>.pLBYangShi").eq(0).html();
+						var huoDongID7 = $(".pppJSHong>.pIDArray").eq(0).html();
+	    				getLieBiaoShuJu(KaiShi7,aYShi7,huoDongID7,QHJieShu7);
+					}
+				}, 500);
+			}
+			if (mui.os.plus) {
+				mui.plusReady(function() {
+					setTimeout(function() {
+						mui('#pullrefresh').pullRefresh().pullupLoading();
+					}, 1000);
+
+				});
+			} else {
+				mui.ready(function() {
+					mui('#pullrefresh').pullRefresh().pullupLoading();
+				});
+			}
+		</script>
+		<script src="js/swiper.min.js"></script>
+
+	    <!-- Initialize Swiper -->
+	    <script>
+	    	
+	    	$(function(){	    		
+	    		var currentDivIndex = 1;
+				var currentIndex = 0;
+				var w = $(window).width();
+			    var swiper = new Swiper('.swiper-container', {
+					width : w,
+					height: 200,
+					initialSlide :currentIndex,   //当前居中显示的是几号
+			        slidesPerView: 3,
+			        freeMode: true,
+					hashnav:true,
+					hashnavWatchState:true,
+					onInit: function(swiper){  //顶部插件初始化
+//								console.log('currentIndex的值为：'+swiper.activeIndex);	
+								$(".pppJSHong").eq(0).attr("class", "pJS1 pppJSHong pYes");
+								if(dateArray.length==2){
+									$(".swiper-slide").css("width","50%");
+								}
+								if(dateArray.length==1){
+									$(".swiper-slide").css("width","100%");
+								}	
+					},
+					onTap:  function(swiper){  //切换
+//							    console.log("swiper.clickedIndex---"+swiper.clickedIndex);
+							    var wrapper  = document.querySelector(".swiper-wrapper");
+							    var w = $('.swiper-slide')[0].style.width.split("p")[0];
+							 
+									if(swiper.clickedIndex != 0 && swiper.clickedIndex != (dateArray.length-1)) {
+										wrapper.style.transition = "all ease-in-out 300ms";
+										wrapper.style.transform = 'translate3d('+(-w*(swiper.clickedIndex-1))+'px, 0px, 0px)';//'transform:  transition-duration: 0ms;';
+							  		}
+							    //切换时控制顶部样式显示、倒计时以及页面展示
+								$(".pJS1").on('tap',function(i){
+									for(i=0;i<7;i++){						
+										$(".pJS1").eq(i).attr("class", "pJS1 pNo");							
+									}						
+									$(this).attr("class", "pJS1 pppJSHong pYes");
+							    })
+								
+								//倒计时、商品列表
+						        var QHKaiShi = dateArray[swiper.clickedIndex][2];
+								var QHJieShu = dateArray[swiper.clickedIndex][4];
+				    			pControlCountdown(QHKaiShi,QHJieShu);
+				    			
+				    			$(".mui-table-view").empty();
+				    			countPages = 0;				    			
+				    			mui('#pullrefresh').pullRefresh().refresh(true);
+				    			
+				    			var aYShiQH = $(".pJS1>.pLBYangShi").eq(swiper.clickedIndex).html();
+				    			var huoDongID4 = $(".pJS1>.pIDArray").eq(swiper.clickedIndex).html();				    			
+		    					getLieBiaoShuJu(QHKaiShi,aYShiQH,huoDongID4,QHJieShu);
+					},
+			    });
+			})
+			
+	    </script>
+	    
+	    <!-- 微信分享链接-->
+	    <!--<script src=" http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    	<script src="${basePath}/js/customer/wxforward.js"></script>
+		<script type="text/javascript">
+			$.get("${basePath}/weixin/getwxsharecfg.html?targeturl="+window.location.href,function(data){
+				data['title'] = 
+				data['desc']= 
+				data['link']=
+				data['imgUrl'] = 
+				initWxShare(data);
+			});
+		</script>-->
+	</body>
+
+</html>

@@ -1,0 +1,41 @@
+{	
+	"servertime": 1497278416000,  
+	"marketingrush":[ 
+		{
+			"marketingId": "1",
+			"marketingName": "",
+			"marketingBegin": 1497268800000,
+ 			"marketingEnd": 1497355200000,
+			"rushDiscount": "0.95"
+		},{	
+			"marketingId": "2",
+			"marketingName": "",
+			"marketingBegin": 1497268800000,
+ 			"marketingEnd": 1497355200000,
+			"rushDiscount": "0.9"
+		},{	
+			"marketingId": "3",
+			"marketingName": "",
+			"marketingBegin": 1497277800000,
+ 			"marketingEnd": 1497364200000,
+			"rushDiscount": "0.9"
+		},{	
+			"marketingId": "4",
+			"marketingName": "",
+			"marketingBegin": 1497277800000,
+ 			"marketingEnd": 1497364200000,
+			
+			"rushDiscount": "0.85"
+		}
+		,{	
+			"marketingId": "4",
+			"marketingName": "",
+			"marketingBegin": 1597277800000,
+ 			"marketingEnd": 1597364200000,
+			
+			"rushDiscount": "0.85"
+		}
+	]
+}
+
+
